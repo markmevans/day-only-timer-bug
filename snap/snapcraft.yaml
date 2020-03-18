@@ -1,0 +1,23 @@
+name: destroy-snapd
+base: core
+version: '0.1'
+summary: timer string with only a weekday puts snapd an unrecovable state.
+description: |
+  THIS WILL PUT SNAPD IN A STATE THAT IT DOES NOT RECOVER FROM. EVEN AFTER A REBOOT.
+  So don't run it unless you can wipe and reinstall your system.
+
+grade: devel
+confinement: devmode
+
+parts:
+  destroy-snapd:
+    plugin: dump
+    source: src
+    organize:
+      do-nothing: bin/do-nothing
+
+apps:
+  destroy-snapd:
+   daemon: oneshot
+   command: bin/do-nothing
+   timer: sat # <------ Totally borks snapd

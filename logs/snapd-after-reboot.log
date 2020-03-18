@@ -1,0 +1,613 @@
+admin@xxxxxxx:~$ sudo journalctl -n 10000 -f -u snapd
+-- Logs begin at Wed 2020-03-18 22:43:32 UTC. --
+Mar 18 22:43:44 xxxxxxx systemd[1]: Starting Snappy daemon...
+Mar 18 22:43:47 xxxxxxx snapd[1645]: AppArmor status: apparmor is enabled and all features are available
+Mar 18 22:43:47 xxxxxxx snapd[1645]: daemon.go:346: started snapd/2.43.3 (series 16) ubuntu-core/16 (amd64) linux/4.4.0-176-generic.
+Mar 18 22:43:47 xxxxxxx snapd[1645]: daemon.go:439: adjusting startup timeout by 1m40s (pessimistic estimate of 30s plus 5s per snap)
+Mar 18 22:43:48 xxxxxxx systemd[1]: Started Snappy daemon.
+Mar 18 22:47:09 xxxxxxx snapd[1645]: fatal error: runtime: out of memory
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime stack:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.throw(0x556209804e30, 0x16)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/panic.go:616 +0x83
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.sysMap(0xc493bd0000, 0x498c0000, 0x0, 0x55620a1dde98)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/mem_linux.go:216 +0x20c
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.(*mheap).sysAlloc(0x55620a1c4760, 0x498c0000, 0x5562090fc7c8)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/malloc.go:470 +0xd6
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.(*mheap).grow(0x55620a1c4760, 0x24c5f, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/mheap.go:907 +0x62
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.(*mheap).allocSpanLocked(0x55620a1c4760, 0x24c5f, 0x55620a1ddea8, 0x55620a1be7d0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/mheap.go:820 +0x303
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.(*mheap).alloc_m(0x55620a1c4760, 0x24c5f, 0x120230100, 0x7f6dcb7fde18)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/mheap.go:686 +0x11c
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.(*mheap).alloc.func1()
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/mheap.go:753 +0x4f
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.(*mheap).alloc(0x55620a1c4760, 0x24c5f, 0x10100, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/mheap.go:752 +0x8c
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.largeAlloc(0x498be000, 0x7f6dcb7f0001, 0x55620913230e)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/malloc.go:826 +0x96
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.mallocgc.func1()
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/malloc.go:721 +0x48
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.systemstack(0x7f6d00000000)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:409 +0x72
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.mstart()
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/proc.go:1175
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 87 [running]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.systemstack_switch()
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:363 fp=0xc42078b080 sp=0xc42078b078 pc=0x556209134100
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.mallocgc(0x498be000, 0x556209cc5d20, 0xc42078b101, 0x3ad6400)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/malloc.go:720 +0x8b4 fp=0xc42078b120 sp=0xc42078b080 pc=0x5562090ec9d4
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.growslice(0x556209cc5d20, 0xc44f91a000, 0x3ad6400, 0x3ad6400, 0x3ad6401, 0xc44f91a000, 0x2f11c00, 0x3ad6400)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/slice.go:179 +0x14c fp=0xc42078b188 sp=0xc42078b120 pc=0x55620911e29c
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/wrappers.makeAbbrevWeekdays(0x6, 0x6, 0x1, 0xc4205d75f0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:704 +0x146 fp=0xc42078b1f0 sp=0xc42078b188 pc=0x5562095964a6
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/wrappers.generateOnCalendarSchedules(0xc4203383f8, 0x1, 0x1, 0x1, 0x1, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:732 +0x117 fp=0xc42078b6b0 sp=0xc42078b1f0 pc=0x556209596777
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/wrappers.generateSnapTimerFile(0xc4200b84e0, 0xc4203602d0, 0xc42078b9a8, 0x0, 0x1, 0xc4205d73a0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:674 +0x138 fp=0xc42078b818 sp=0xc42078b6b0 pc=0x556209595fb8
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/wrappers.AddSnapServices(0xc42021d880, 0x55620a1dc128, 0x0, 0x0, 0x556209e00a60, 0x55620a1dc128, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:274 +0x9d1 fp=0xc42078ba78 sp=0xc42078b818 pc=0x556209593411
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/snapstate/backend.generateWrappers(0xc42021d880, 0x55620a1dc128, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/backend/link.go:164 +0x139 fp=0xc42078baf0 sp=0xc42078ba78 pc=0x5562095a00e9
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/snapstate/backend.Backend.LinkSnap.func1(0x556209dff6a0, 0xc4201372d0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/backend/link.go:89 +0x50 fp=0xc42078bb38 sp=0xc42078baf0 pc=0x5562095a3b30
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/timings.Run(0x556209dff6c0, 0xc4201c5280, 0x5562097ff01d, 0x11, 0xc42067c2a0, 0x28, 0xc4205efc18)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/timings/helpers.go:46 +0x83 fp=0xc42078bb80 sp=0xc42078bb38 pc=0x55620953eb53
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/snapstate/backend.Backend.LinkSnap(0xc42021d880, 0xc4202b2700, 0x55620a1dc128, 0x0, 0x0, 0x556209dff6c0, 0xc4201c5280, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/backend/link.go:88 +0x1ac fp=0xc42078bc58 sp=0xc42078bb80 pc=0x55620959fa5c
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/snapstate/backend.(*Backend).LinkSnap(0x55620a1dc128, 0xc42021d880, 0xc4202b2700, 0x55620a1dc128, 0x0, 0x0, 0x556209dff6c0, 0xc4201c5280, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         <autogenerated>:1 +0x8d fp=0xc42078bcb0 sp=0xc42078bc58 pc=0x5562095a496d
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/snapstate.(*SnapManager).doLinkSnap(0xc4200a0c30, 0xc420408360, 0xc42066df90, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/handlers.go:1189 +0x581 fp=0xc42078be88 sp=0xc42078bcb0 pc=0x5562096531a1
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/snapstate.(*SnapManager).(github.com/snapcore/snapd/overlord/snapstate.doLinkSnap)-fm(0xc420408360, 0xc42066df90, 0x55620a1be320, 0x5562093805a1)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/snapmgr.go:425 +0x40 fp=0xc42078bec0 sp=0xc42078be88 pc=0x556209681fa0
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/state.(*TaskRunner).run.func1(0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/state/taskrunner.go:195 +0xbb fp=0xc42078bf98 sp=0xc42078bec0 pc=0x55620953ce4b
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc42066df90, 0xc4206ce3f0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d fp=0xc42078bfd0 sp=0xc42078bf98 pc=0x55620920f87d
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.goexit()
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:2361 +0x1 fp=0xc42078bfd8 sp=0xc42078bfd0 pc=0x556209136cc1
+Mar 18 22:47:09 xxxxxxx snapd[1645]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 1 [select, 3 minutes]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: main.run(0xc420362540, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:153 +0x4f5
+Mar 18 22:47:09 xxxxxxx snapd[1645]: main.main()
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:64 +0x114
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 5 [syscall, 3 minutes]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: os/signal.signal_recv(0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/sigqueue.go:139 +0xa8
+Mar 18 22:47:09 xxxxxxx snapd[1645]: os/signal.loop()
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/os/signal/signal_unix.go:22 +0x24
+Mar 18 22:47:09 xxxxxxx snapd[1645]: created by os/signal.init.0
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/os/signal/signal_unix.go:28 +0x43
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 19 [select, 3 minutes, locked to thread]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.gopark(0x556209df9fd8, 0x0, 0x5562097f357b, 0x6, 0x18, 0x1)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/proc.go:291 +0x120
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.selectgo(0xc420050750, 0xc4203760c0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/select.go:392 +0xe56
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.ensureSigM.func1()
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/signal_unix.go:549 +0x1f6
+Mar 18 22:47:09 xxxxxxx snapd[1645]: runtime.goexit()
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:2361 +0x1
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 24 [IO wait, 3 minutes]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: internal/poll.runtime_pollWait(0x7f6dd336df00, 0x72, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/netpoll.go:173 +0x59
+Mar 18 22:47:09 xxxxxxx snapd[1645]: internal/poll.(*pollDesc).wait(0xc420032598, 0x72, 0xc420280200, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:85 +0x9d
+Mar 18 22:47:09 xxxxxxx snapd[1645]: internal/poll.(*pollDesc).waitRead(0xc420032598, 0xffffffffffffff00, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:90 +0x3f
+Mar 18 22:47:09 xxxxxxx snapd[1645]: internal/poll.(*FD).Accept(0xc420032580, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/internal/poll/fd_unix.go:372 +0x1aa
+Mar 18 22:47:09 xxxxxxx snapd[1645]: net.(*netFD).accept(0xc420032580, 0xc42005cdd0, 0xc4201f2090, 0x556209dfa108)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/net/fd_unix.go:238 +0x44
+Mar 18 22:47:09 xxxxxxx snapd[1645]: net.(*UnixListener).accept(0xc4202e1d10, 0x5562097dec70, 0xc42031a110, 0xc42058a330)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/net/unixsock_posix.go:162 +0x34
+Mar 18 22:47:09 xxxxxxx snapd[1645]: net.(*UnixListener).Accept(0xc4202e1d10, 0xc4204016a0, 0xc42005ce50, 0x5562097e993a, 0xc42031a110)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/net/unixsock.go:253 +0x4b
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/daemon.(*ucrednetListener).Accept(0xc4202e1d70, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/ucrednet.go:108 +0x4f
+Mar 18 22:47:09 xxxxxxx snapd[1645]: net/http.(*Server).Serve(0xc42047c1a0, 0x556209e07060, 0xc4202e1d70, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/net/http/server.go:2773 +0x1a7
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/daemon.(*Daemon).Start.func1.1(0x55620920cccb, 0xc4204269c0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/daemon.go:462 +0x4b
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc420378600, 0xc4202f4000)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:47:09 xxxxxxx snapd[1645]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 15 [semacquire, 3 minutes]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: sync.runtime_SemacquireMutex(0xc42039c124, 0xc42004be00)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/sema.go:71 +0x3f
+Mar 18 22:47:09 xxxxxxx snapd[1645]: sync.(*Mutex).Lock(0xc42039c120)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/sync/mutex.go:134 +0x10a
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/state.(*State).Lock(0xc42039c120)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/state/state.go:139 +0x2f
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/standby.(*StandbyOpinions).CanStandby(0xc42036a3c0, 0x4a817c800)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/standby/standby.go:52 +0x52
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/standby.(*StandbyOpinions).Start.func1(0xc42036a3c0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/standby/standby.go:88 +0x8a
+Mar 18 22:47:09 xxxxxxx snapd[1645]: created by github.com/snapcore/snapd/overlord/standby.(*StandbyOpinions).Start
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/standby/standby.go:84 +0x41
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 34 [select, 3 minutes]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord.(*Overlord).Loop.func1(0xc420030210, 0xc420030220)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/overlord.go:399 +0x154
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc42036a460, 0xc42031a160)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:47:09 xxxxxxx snapd[1645]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 35 [IO wait, 3 minutes]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: internal/poll.runtime_pollWait(0x7f6dd336de30, 0x72, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/netpoll.go:173 +0x59
+Mar 18 22:47:09 xxxxxxx snapd[1645]: internal/poll.(*pollDesc).wait(0xc420032498, 0x72, 0xc420084100, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:85 +0x9d
+Mar 18 22:47:09 xxxxxxx snapd[1645]: internal/poll.(*pollDesc).waitRead(0xc420032498, 0xffffffffffffff00, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:90 +0x3f
+Mar 18 22:47:09 xxxxxxx snapd[1645]: internal/poll.(*FD).Accept(0xc420032480, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/internal/poll/fd_unix.go:372 +0x1aa
+Mar 18 22:47:09 xxxxxxx snapd[1645]: net.(*netFD).accept(0xc420032480, 0xc4204cddd0, 0xc4201f2090, 0x556209dfa108)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/net/fd_unix.go:238 +0x44
+Mar 18 22:47:09 xxxxxxx snapd[1645]: net.(*UnixListener).accept(0xc4202e1ce0, 0x5562097dec70, 0xc42031a110, 0xc42058a330)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/net/unixsock_posix.go:162 +0x34
+Mar 18 22:47:09 xxxxxxx snapd[1645]: net.(*UnixListener).Accept(0xc4202e1ce0, 0xc420400dc0, 0xc4204cde50, 0x5562097e993a, 0xc42031a110)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/net/unixsock.go:253 +0x4b
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/daemon.(*ucrednetListener).Accept(0xc4202e1d40, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/ucrednet.go:108 +0x4f
+Mar 18 22:47:09 xxxxxxx snapd[1645]: net/http.(*Server).Serve(0xc42047c1a0, 0x556209e07060, 0xc4202e1d40, 0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/net/http/server.go:2773 +0x1a7
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/daemon.(*Daemon).Start.func1(0x0, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/daemon.go:470 +0x58
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc420378600, 0xc42031a170)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:47:09 xxxxxxx snapd[1645]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 36 [select]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: main.runWatchdog.func1(0xc42036a550, 0xc4203785b0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:93 +0xff
+Mar 18 22:47:09 xxxxxxx snapd[1645]: created by main.runWatchdog
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:91 +0x22d
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 85 [syscall, 2 minutes]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: syscall.Syscall6(0x2d, 0x4, 0xc420662000, 0x1000, 0x2, 0xc4204c7e08, 0xc4204c7dfc, 0x5562090ebf88, 0x7f6dd3379bb8, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/syscall/asm_linux_amd64.s:44 +0x5
+Mar 18 22:47:09 xxxxxxx snapd[1645]: syscall.recvfrom(0x4, 0xc420662000, 0x1000, 0x1000, 0x2, 0xc4204c7e08, 0xc4204c7dfc, 0x101000000000000, 0x0, 0x1000)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/syscall/zsyscall_linux_amd64.go:1665 +0xa8
+Mar 18 22:47:09 xxxxxxx snapd[1645]: syscall.Recvfrom(0x4, 0xc420662000, 0x1000, 0x1000, 0x2, 0x1000, 0xc4206a7d70, 0xc420371e00, 0x2, 0xc4207a8c10)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/syscall/syscall_unix.go:252 +0xb1
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).ReadMsg(0xc42020c180, 0x5562090e095c, 0xc4204d6420, 0x0, 0xc4206a7d00, 0x0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:65 +0xc9
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).ReadUEvent(0xc42020c180, 0xc4204d6420, 0x0, 0xc42057c320)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:92 +0x31
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).Monitor.func1(0xc4204d6420, 0xc42020c180, 0xc4204d63c0, 0x556209e094a0, 0xc4201bd8e0, 0xc4204d6360)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:120 +0x55
+Mar 18 22:47:09 xxxxxxx snapd[1645]: created by github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).Monitor
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:114 +0xa6
+Mar 18 22:47:09 xxxxxxx snapd[1645]: goroutine 86 [semacquire, 3 minutes]:
+Mar 18 22:47:09 xxxxxxx snapd[1645]: sync.runtime_SemacquireMutex(0xc42039c124, 0x556209106400)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/runtime/sema.go:71 +0x3f
+Mar 18 22:47:09 xxxxxxx snapd[1645]: sync.(*Mutex).Lock(0xc42039c120)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /usr/lib/go-1.10/src/sync/mutex.go:134 +0x10a
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/state.(*State).Lock(0xc42039c120)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/state/state.go:139 +0x2f
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/ifacestate.(*InterfaceManager).hotplugDeviceAdded(0xc42039c360, 0xc42036e0d0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/ifacestate/hotplug.go:110 +0x50
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/ifacestate.(*InterfaceManager).(github.com/snapcore/snapd/overlord/ifacestate.hotplugDeviceAdded)-fm(0xc42036e0d0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/ifacestate/ifacemgr.go:307 +0x36
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/overlord/ifacestate/udevmonitor.(*Monitor).Run.func1(0x55620910f2ea, 0x556209df9e70)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/ifacestate/udevmonitor/udevmon.go:136 +0x20a
+Mar 18 22:47:09 xxxxxxx snapd[1645]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc4201f27e0, 0xc4200844c0)
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:47:09 xxxxxxx snapd[1645]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:47:09 xxxxxxx snapd[1645]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:47:09 xxxxxxx systemd[1]: snapd.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+Mar 18 22:47:09 xxxxxxx systemd[1]: snapd.service: Unit entered failed state.
+Mar 18 22:47:09 xxxxxxx systemd[1]: snapd.service: Triggering OnFailure= dependencies.
+Mar 18 22:47:09 xxxxxxx systemd[1]: snapd.service: Failed with result 'exit-code'.
+Mar 18 22:47:09 xxxxxxx systemd[1]: snapd.service: Service hold-off time over, scheduling restart.
+Mar 18 22:47:09 xxxxxxx systemd[1]: Stopped Snappy daemon.
+Mar 18 22:47:09 xxxxxxx systemd[1]: Starting Snappy daemon...
+Mar 18 22:47:11 xxxxxxx snapd[2500]: AppArmor status: apparmor is enabled and all features are available
+Mar 18 22:47:11 xxxxxxx snapd[2500]: daemon.go:346: started snapd/2.43.3 (series 16) ubuntu-core/16 (amd64) linux/4.4.0-176-generic.
+Mar 18 22:47:11 xxxxxxx snapd[2500]: daemon.go:439: adjusting startup timeout by 1m40s (pessimistic estimate of 30s plus 5s per snap)
+Mar 18 22:47:12 xxxxxxx systemd[1]: Started Snappy daemon.
+Mar 18 22:51:54 xxxxxxx snapd[2500]: fatal error: runtime: out of memory
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime stack:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.throw(0x55acc367ae30, 0x16)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/panic.go:616 +0x83
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.sysMap(0xc4b73d0000, 0x5bef0000, 0xc4207b0000, 0x55acc4053e98)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/mem_linux.go:216 +0x20c
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.(*mheap).sysAlloc(0x55acc403a760, 0x5bef0000, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/malloc.go:470 +0xd6
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.(*mheap).grow(0x55acc403a760, 0x2df77, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/mheap.go:907 +0x62
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.(*mheap).allocSpanLocked(0x55acc403a760, 0x2df77, 0x55acc4053ea8, 0x1)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/mheap.go:820 +0x303
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.(*mheap).alloc_m(0x55acc403a760, 0x2df77, 0xffffffffffff0100, 0x7f2854f3fe18)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/mheap.go:686 +0x11c
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.(*mheap).alloc.func1()
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/mheap.go:753 +0x4f
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.(*mheap).alloc(0x55acc403a760, 0x2df77, 0x7f2854010100, 0xc42052ac00)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/mheap.go:752 +0x8c
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.largeAlloc(0x5beee000, 0x55acc4030001, 0xc42052ac01)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/malloc.go:826 +0x96
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.mallocgc.func1()
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/malloc.go:721 +0x48
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.systemstack(0x7f2800000000)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:409 +0x72
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.mstart()
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/proc.go:1175
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 58 [running]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.systemstack_switch()
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:363 fp=0xc42057f080 sp=0xc42057f078 pc=0x55acc2faa100
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.mallocgc(0x5beee000, 0x55acc3b3bd20, 0xc42057f101, 0x498bd6b)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/malloc.go:720 +0x8b4 fp=0xc42057f120 sp=0xc42057f080 pc=0x55acc2f629d4
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.growslice(0x55acc3b3bd20, 0xc420872000, 0x498be00, 0x498be00, 0x498be01, 0xc420872000, 0x3ad6400, 0x498be00)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/slice.go:179 +0x14c fp=0xc42057f188 sp=0xc42057f120 pc=0x55acc2f9429c
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/wrappers.makeAbbrevWeekdays(0x6, 0x6, 0x1, 0xc4205249e0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:704 +0x146 fp=0xc42057f1f0 sp=0xc42057f188 pc=0x55acc340c4a6
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/wrappers.generateOnCalendarSchedules(0xc4200a82e8, 0x1, 0x1, 0x1, 0x1, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:732 +0x117 fp=0xc42057f6b0 sp=0xc42057f1f0 pc=0x55acc340c777
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/wrappers.generateSnapTimerFile(0xc42083e680, 0xc420606c90, 0xc42057f9a8, 0x0, 0x1, 0xc420524770)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:674 +0x138 fp=0xc42057f818 sp=0xc42057f6b0 pc=0x55acc340bfb8
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/wrappers.AddSnapServices(0xc42081e380, 0x55acc4052128, 0x0, 0x0, 0x55acc3c76a60, 0x55acc4052128, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:274 +0x9d1 fp=0xc42057fa78 sp=0xc42057f818 pc=0x55acc3409411
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/snapstate/backend.generateWrappers(0xc42081e380, 0x55acc4052128, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/backend/link.go:164 +0x139 fp=0xc42057faf0 sp=0xc42057fa78 pc=0x55acc34160e9
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/snapstate/backend.Backend.LinkSnap.func1(0x55acc3c756a0, 0xc4205b50a0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/backend/link.go:89 +0x50 fp=0xc42057fb38 sp=0xc42057faf0 pc=0x55acc3419b30
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/timings.Run(0x55acc3c756c0, 0xc4205fc960, 0x55acc367501d, 0x11, 0xc420038b10, 0x28, 0xc420079c18)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/timings/helpers.go:46 +0x83 fp=0xc42057fb80 sp=0xc42057fb38 pc=0x55acc33b4b53
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/snapstate/backend.Backend.LinkSnap(0xc42081e380, 0xc420778700, 0x55acc4052128, 0x0, 0x0, 0x55acc3c756c0, 0xc4205fc960, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/backend/link.go:88 +0x1ac fp=0xc42057fc58 sp=0xc42057fb80 pc=0x55acc3415a5c
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/snapstate/backend.(*Backend).LinkSnap(0x55acc4052128, 0xc42081e380, 0xc420778700, 0x55acc4052128, 0x0, 0x0, 0x55acc3c756c0, 0xc4205fc960, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         <autogenerated>:1 +0x8d fp=0xc42057fcb0 sp=0xc42057fc58 pc=0x55acc341a96d
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/snapstate.(*SnapManager).doLinkSnap(0xc4200aad70, 0xc42041fc20, 0xc4205e6cd0, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/handlers.go:1189 +0x581 fp=0xc42057fe88 sp=0xc42057fcb0 pc=0x55acc34c91a1
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/snapstate.(*SnapManager).(github.com/snapcore/snapd/overlord/snapstate.doLinkSnap)-fm(0xc42041fc20, 0xc4205e6cd0, 0x55acc4034320, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/snapmgr.go:425 +0x40 fp=0xc42057fec0 sp=0xc42057fe88 pc=0x55acc34f7fa0
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/state.(*TaskRunner).run.func1(0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/state/taskrunner.go:195 +0xbb fp=0xc42057ff98 sp=0xc42057fec0 pc=0x55acc33b2e4b
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc4205e6cd0, 0xc420482ae0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d fp=0xc42057ffd0 sp=0xc42057ff98 pc=0x55acc308587d
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.goexit()
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:2361 +0x1 fp=0xc42057ffd8 sp=0xc42057ffd0 pc=0x55acc2faccc1
+Mar 18 22:51:54 xxxxxxx snapd[2500]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 1 [select, 4 minutes]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: main.run(0xc42007e5a0, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:153 +0x4f5
+Mar 18 22:51:54 xxxxxxx snapd[2500]: main.main()
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:64 +0x114
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 19 [syscall, 4 minutes]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: os/signal.signal_recv(0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/sigqueue.go:139 +0xa8
+Mar 18 22:51:54 xxxxxxx snapd[2500]: os/signal.loop()
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/os/signal/signal_unix.go:22 +0x24
+Mar 18 22:51:54 xxxxxxx snapd[2500]: created by os/signal.init.0
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/os/signal/signal_unix.go:28 +0x43
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 5 [select, 4 minutes, locked to thread]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.gopark(0x55acc3c6ffd8, 0x0, 0x55acc366957b, 0x6, 0x18, 0x1)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/proc.go:291 +0x120
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.selectgo(0xc42004b750, 0xc42039e0c0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/select.go:392 +0xe56
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.ensureSigM.func1()
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/signal_unix.go:549 +0x1f6
+Mar 18 22:51:54 xxxxxxx snapd[2500]: runtime.goexit()
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:2361 +0x1
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 27 [IO wait, 4 minutes]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: internal/poll.runtime_pollWait(0x7f285800ee30, 0x72, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/netpoll.go:173 +0x59
+Mar 18 22:51:54 xxxxxxx snapd[2500]: internal/poll.(*pollDesc).wait(0xc42009a418, 0x72, 0xc42007cb00, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:85 +0x9d
+Mar 18 22:51:54 xxxxxxx snapd[2500]: internal/poll.(*pollDesc).waitRead(0xc42009a418, 0xffffffffffffff00, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:90 +0x3f
+Mar 18 22:51:54 xxxxxxx snapd[2500]: internal/poll.(*FD).Accept(0xc42009a400, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/internal/poll/fd_unix.go:372 +0x1aa
+Mar 18 22:51:54 xxxxxxx snapd[2500]: net.(*netFD).accept(0xc42009a400, 0x30, 0x55acc3bff7a0, 0xc42007cba0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/net/fd_unix.go:238 +0x44
+Mar 18 22:51:54 xxxxxxx snapd[2500]: net.(*UnixListener).accept(0xc42030dce0, 0x0, 0xc42038e000, 0xc420405e30)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/net/unixsock_posix.go:162 +0x34
+Mar 18 22:51:54 xxxxxxx snapd[2500]: net.(*UnixListener).Accept(0xc42030dce0, 0xc420405e30, 0xc420405e50, 0x55acc2f62c7a, 0x30)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/net/unixsock.go:253 +0x4b
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/daemon.(*ucrednetListener).Accept(0xc42030dd40, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/ucrednet.go:108 +0x4f
+Mar 18 22:51:54 xxxxxxx snapd[2500]: net/http.(*Server).Serve(0xc4203e80d0, 0x55acc3c7d060, 0xc42030dd40, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/net/http/server.go:2773 +0x1a7
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/daemon.(*Daemon).Start.func1(0x55acc3082ccb, 0xc42032b4a0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/daemon.go:470 +0x58
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc4201c7b20, 0xc4203248c0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:51:54 xxxxxxx snapd[2500]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 28 [select]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: main.runWatchdog.func1(0xc4200ab270, 0xc4201c7ad0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:93 +0xff
+Mar 18 22:51:54 xxxxxxx snapd[2500]: created by main.runWatchdog
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:91 +0x22d
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 26 [select, 4 minutes]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord.(*Overlord).Loop.func1(0x55acc3082ccb, 0xc42032b560)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/overlord.go:399 +0x154
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc42029e5f0, 0xc4203248b0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:51:54 xxxxxxx snapd[2500]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 24 [semacquire, 4 minutes]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: sync.runtime_SemacquireMutex(0xc42014eab4, 0xc42004c600)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/sema.go:71 +0x3f
+Mar 18 22:51:54 xxxxxxx snapd[2500]: sync.(*Mutex).Lock(0xc42014eab0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/sync/mutex.go:134 +0x10a
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/state.(*State).Lock(0xc42014eab0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/state/state.go:139 +0x2f
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/standby.(*StandbyOpinions).CanStandby(0xc4200ab130, 0x2540be400)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/standby/standby.go:52 +0x52
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/standby.(*StandbyOpinions).Start.func1(0xc4200ab130)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/standby/standby.go:88 +0x8a
+Mar 18 22:51:54 xxxxxxx snapd[2500]: created by github.com/snapcore/snapd/overlord/standby.(*StandbyOpinions).Start
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/standby/standby.go:84 +0x41
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 15 [IO wait, 4 minutes]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: internal/poll.runtime_pollWait(0x7f285800ef00, 0x72, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/netpoll.go:173 +0x59
+Mar 18 22:51:54 xxxxxxx snapd[2500]: internal/poll.(*pollDesc).wait(0xc42009a518, 0x72, 0xc42036a000, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:85 +0x9d
+Mar 18 22:51:54 xxxxxxx snapd[2500]: internal/poll.(*pollDesc).waitRead(0xc42009a518, 0xffffffffffffff00, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:90 +0x3f
+Mar 18 22:51:54 xxxxxxx snapd[2500]: internal/poll.(*FD).Accept(0xc42009a500, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/internal/poll/fd_unix.go:372 +0x1aa
+Mar 18 22:51:54 xxxxxxx snapd[2500]: net.(*netFD).accept(0xc42009a500, 0x30, 0x55acc3bff7a0, 0xc42036a0e0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/net/fd_unix.go:238 +0x44
+Mar 18 22:51:54 xxxxxxx snapd[2500]: net.(*UnixListener).accept(0xc42030dd10, 0x0, 0xc42038e000, 0xc420564e30)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/net/unixsock_posix.go:162 +0x34
+Mar 18 22:51:54 xxxxxxx snapd[2500]: net.(*UnixListener).Accept(0xc42030dd10, 0xc420564e30, 0xc420564e50, 0x55acc2f62c7a, 0x30)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/net/unixsock.go:253 +0x4b
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/daemon.(*ucrednetListener).Accept(0xc42030dd70, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/ucrednet.go:108 +0x4f
+Mar 18 22:51:54 xxxxxxx snapd[2500]: net/http.(*Server).Serve(0xc4203e80d0, 0x55acc3c7d060, 0xc42030dd70, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/net/http/server.go:2773 +0x1a7
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/daemon.(*Daemon).Start.func1.1(0xc4200981e0, 0xc4200981f0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/daemon.go:462 +0x4b
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc4201c7b20, 0xc420030020)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:51:54 xxxxxxx snapd[2500]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 57 [semacquire, 4 minutes]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: sync.runtime_SemacquireMutex(0xc42014eab4, 0x55acc2f7c400)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/runtime/sema.go:71 +0x3f
+Mar 18 22:51:54 xxxxxxx snapd[2500]: sync.(*Mutex).Lock(0xc42014eab0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/sync/mutex.go:134 +0x10a
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/state.(*State).Lock(0xc42014eab0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/state/state.go:139 +0x2f
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/ifacestate.(*InterfaceManager).hotplugDeviceAdded(0xc42014e2d0, 0xc420364468)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/ifacestate/hotplug.go:110 +0x50
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/ifacestate.(*InterfaceManager).(github.com/snapcore/snapd/overlord/ifacestate.hotplugDeviceAdded)-fm(0xc420364468)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/ifacestate/ifacemgr.go:307 +0x36
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/overlord/ifacestate/udevmonitor.(*Monitor).Run.func1(0x55acc2f852ea, 0x55acc3c6fe70)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/ifacestate/udevmonitor/udevmon.go:136 +0x20a
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc4203c2510, 0xc4200ace00)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:51:54 xxxxxxx snapd[2500]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:51:54 xxxxxxx snapd[2500]: goroutine 56 [syscall, 4 minutes]:
+Mar 18 22:51:54 xxxxxxx snapd[2500]: syscall.Syscall6(0x2d, 0x4, 0xc42001c000, 0x1000, 0x2, 0xc420562e08, 0xc420562dfc, 0x55acc2f61f88, 0x7f2858021c70, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/syscall/asm_linux_amd64.s:44 +0x5
+Mar 18 22:51:54 xxxxxxx snapd[2500]: syscall.recvfrom(0x4, 0xc42001c000, 0x1000, 0x1000, 0x2, 0xc420562e08, 0xc420562dfc, 0x101000000000002, 0x0, 0x1000)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/syscall/zsyscall_linux_amd64.go:1665 +0xa8
+Mar 18 22:51:54 xxxxxxx snapd[2500]: syscall.Recvfrom(0x4, 0xc42001c000, 0x1000, 0x1000, 0x2, 0x1000, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /usr/lib/go-1.10/src/syscall/syscall_unix.go:252 +0xb1
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).ReadMsg(0xc4204959e0, 0x55acc2f5695c, 0xc420340540, 0x0, 0x0, 0x0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:65 +0xc9
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).ReadUEvent(0xc4204959e0, 0xc420340540, 0xc420562f00, 0xc420562fc0)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:92 +0x31
+Mar 18 22:51:54 xxxxxxx snapd[2500]: github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).Monitor.func1(0xc420340540, 0xc4204959e0, 0xc4203404e0, 0x55acc3c7f4a0, 0xc4205777a0, 0xc420340480)
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:120 +0x55
+Mar 18 22:51:54 xxxxxxx snapd[2500]: created by github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).Monitor
+Mar 18 22:51:54 xxxxxxx snapd[2500]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:114 +0xa6
+Mar 18 22:51:54 xxxxxxx systemd[1]: snapd.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+Mar 18 22:51:54 xxxxxxx systemd[1]: snapd.service: Unit entered failed state.
+Mar 18 22:51:54 xxxxxxx systemd[1]: snapd.service: Triggering OnFailure= dependencies.
+Mar 18 22:51:54 xxxxxxx systemd[1]: snapd.service: Failed with result 'exit-code'.
+Mar 18 22:51:54 xxxxxxx systemd[1]: snapd.service: Service hold-off time over, scheduling restart.
+Mar 18 22:51:54 xxxxxxx systemd[1]: Stopped Snappy daemon.
+Mar 18 22:51:54 xxxxxxx systemd[1]: Starting Snappy daemon...
+Mar 18 22:51:56 xxxxxxx snapd[2601]: AppArmor status: apparmor is enabled and all features are available
+Mar 18 22:51:56 xxxxxxx snapd[2601]: daemon.go:346: started snapd/2.43.3 (series 16) ubuntu-core/16 (amd64) linux/4.4.0-176-generic.
+Mar 18 22:51:56 xxxxxxx snapd[2601]: daemon.go:439: adjusting startup timeout by 1m40s (pessimistic estimate of 30s plus 5s per snap)
+Mar 18 22:51:57 xxxxxxx systemd[1]: Started Snappy daemon.
+Mar 18 22:53:41 xxxxxxx snapd[2601]: fatal error: runtime: out of memory
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime stack:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.throw(0x55f265e7ae30, 0x16)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/panic.go:616 +0x83
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.sysMap(0xc495380000, 0x498c0000, 0x0, 0x55f266853e98)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/mem_linux.go:216 +0x20c
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.(*mheap).sysAlloc(0x55f26683a760, 0x498c0000, 0x1)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/malloc.go:470 +0xd6
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.(*mheap).grow(0x55f26683a760, 0x24c5f, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/mheap.go:907 +0x62
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.(*mheap).allocSpanLocked(0x55f26683a760, 0x24c5f, 0x55f266853ea8, 0x1788e)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/mheap.go:820 +0x303
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.(*mheap).alloc_m(0x55f26683a760, 0x24c5f, 0xffffffffffff0100, 0x7fb421a3ee18)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/mheap.go:686 +0x11c
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.(*mheap).alloc.func1()
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/mheap.go:753 +0x4f
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.(*mheap).alloc(0x55f26683a760, 0x24c5f, 0x7fb421010100, 0xc42073c480)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/mheap.go:752 +0x8c
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.largeAlloc(0x498be000, 0x55f266830001, 0x1)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/malloc.go:826 +0x96
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.mallocgc.func1()
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/malloc.go:721 +0x48
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.systemstack(0x7ffe00000000)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:409 +0x72
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.mstart()
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/proc.go:1175
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 53 [running]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.systemstack_switch()
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:363 fp=0xc4207c7080 sp=0xc4207c7078 pc=0x55f2657aa100
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.mallocgc(0x498be000, 0x55f26633bd20, 0xc4207c7101, 0x3ad63ff)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/malloc.go:720 +0x8b4 fp=0xc4207c7120 sp=0xc4207c7080 pc=0x55f2657629d4
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.growslice(0x55f26633bd20, 0xc44f930000, 0x3ad6400, 0x3ad6400, 0x3ad6401, 0xc44f930000, 0x2f11c00, 0x3ad6400)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/slice.go:179 +0x14c fp=0xc4207c7188 sp=0xc4207c7120 pc=0x55f26579429c
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/wrappers.makeAbbrevWeekdays(0x6, 0x6, 0x1, 0xc4205f4230, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:704 +0x146 fp=0xc4207c71f0 sp=0xc4207c7188 pc=0x55f265c0c4a6
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/wrappers.generateOnCalendarSchedules(0xc42000e1f8, 0x1, 0x1, 0x1, 0x1, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:732 +0x117 fp=0xc4207c76b0 sp=0xc4207c71f0 pc=0x55f265c0c777
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/wrappers.generateSnapTimerFile(0xc420221520, 0xc4207c9020, 0xc4207c79a8, 0x0, 0x1, 0xc4205f48b0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:674 +0x138 fp=0xc4207c7818 sp=0xc4207c76b0 pc=0x55f265c0bfb8
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/wrappers.AddSnapServices(0xc4207aca80, 0x55f266852128, 0x0, 0x0, 0x55f266476a60, 0x55f266852128, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/wrappers/services.go:274 +0x9d1 fp=0xc4207c7a78 sp=0xc4207c7818 pc=0x55f265c09411
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/snapstate/backend.generateWrappers(0xc4207aca80, 0x55f266852128, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/backend/link.go:164 +0x139 fp=0xc4207c7af0 sp=0xc4207c7a78 pc=0x55f265c160e9
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/snapstate/backend.Backend.LinkSnap.func1(0x55f2664756a0, 0xc4207b85b0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/backend/link.go:89 +0x50 fp=0xc4207c7b38 sp=0xc4207c7af0 pc=0x55f265c19b30
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/timings.Run(0x55f2664756c0, 0xc4205c3a60, 0x55f265e7501d, 0x11, 0xc4206470b0, 0x28, 0xc420109c18)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/timings/helpers.go:46 +0x83 fp=0xc4207c7b80 sp=0xc4207c7b38 pc=0x55f265bb4b53
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/snapstate/backend.Backend.LinkSnap(0xc4207aca80, 0xc42061d300, 0x55f266852128, 0x0, 0x0, 0x55f2664756c0, 0xc4205c3a60, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/backend/link.go:88 +0x1ac fp=0xc4207c7c58 sp=0xc4207c7b80 pc=0x55f265c15a5c
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/snapstate/backend.(*Backend).LinkSnap(0x55f266852128, 0xc4207aca80, 0xc42061d300, 0x55f266852128, 0x0, 0x0, 0x55f2664756c0, 0xc4205c3a60, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         <autogenerated>:1 +0x8d fp=0xc4207c7cb0 sp=0xc4207c7c58 pc=0x55f265c1a96d
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/snapstate.(*SnapManager).doLinkSnap(0xc4200aac30, 0xc420425e60, 0xc420441950, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/handlers.go:1189 +0x581 fp=0xc4207c7e88 sp=0xc4207c7cb0 pc=0x55f265cc91a1
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/snapstate.(*SnapManager).(github.com/snapcore/snapd/overlord/snapstate.doLinkSnap)-fm(0xc420425e60, 0xc420441950, 0x55f266834320, 0xc42004fef8)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/snapstate/snapmgr.go:425 +0x40 fp=0xc4207c7ec0 sp=0xc4207c7e88 pc=0x55f265cf7fa0
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/state.(*TaskRunner).run.func1(0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/state/taskrunner.go:195 +0xbb fp=0xc4207c7f98 sp=0xc4207c7ec0 pc=0x55f265bb2e4b
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc420441950, 0xc4204bc9c0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d fp=0xc4207c7fd0 sp=0xc4207c7f98 pc=0x55f26588587d
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.goexit()
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:2361 +0x1 fp=0xc4207c7fd8 sp=0xc4207c7fd0 pc=0x55f2657accc1
+Mar 18 22:53:41 xxxxxxx snapd[2601]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 1 [select, 1 minutes]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: main.run(0xc42007e5a0, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:153 +0x4f5
+Mar 18 22:53:41 xxxxxxx snapd[2601]: main.main()
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:64 +0x114
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 19 [syscall, 1 minutes]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: os/signal.signal_recv(0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/sigqueue.go:139 +0xa8
+Mar 18 22:53:41 xxxxxxx snapd[2601]: os/signal.loop()
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/os/signal/signal_unix.go:22 +0x24
+Mar 18 22:53:41 xxxxxxx snapd[2601]: created by os/signal.init.0
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/os/signal/signal_unix.go:28 +0x43
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 5 [select, 1 minutes, locked to thread]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.gopark(0x55f26646ffd8, 0x0, 0x55f265e6957b, 0x6, 0x18, 0x1)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/proc.go:291 +0x120
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.selectgo(0xc42004f750, 0xc42039e0c0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/select.go:392 +0xe56
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.ensureSigM.func1()
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/signal_unix.go:549 +0x1f6
+Mar 18 22:53:41 xxxxxxx snapd[2601]: runtime.goexit()
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/asm_amd64.s:2361 +0x1
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 13 [semacquire, 1 minutes]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: sync.runtime_SemacquireMutex(0xc42014eab4, 0xc420051600)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/sema.go:71 +0x3f
+Mar 18 22:53:41 xxxxxxx snapd[2601]: sync.(*Mutex).Lock(0xc42014eab0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/sync/mutex.go:134 +0x10a
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/state.(*State).Lock(0xc42014eab0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/state/state.go:139 +0x2f
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/standby.(*StandbyOpinions).CanStandby(0xc4200aa730, 0x2540be400)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/standby/standby.go:52 +0x52
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/standby.(*StandbyOpinions).Start.func1(0xc4200aa730)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/standby/standby.go:88 +0x8a
+Mar 18 22:53:41 xxxxxxx snapd[2601]: created by github.com/snapcore/snapd/overlord/standby.(*StandbyOpinions).Start
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/standby/standby.go:84 +0x41
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 25 [IO wait, 1 minutes]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: internal/poll.runtime_pollWait(0x7fb4229a9f00, 0x72, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/netpoll.go:173 +0x59
+Mar 18 22:53:41 xxxxxxx snapd[2601]: internal/poll.(*pollDesc).wait(0xc42009a518, 0x72, 0xc4200ad500, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:85 +0x9d
+Mar 18 22:53:41 xxxxxxx snapd[2601]: internal/poll.(*pollDesc).waitRead(0xc42009a518, 0xffffffffffffff00, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:90 +0x3f
+Mar 18 22:53:41 xxxxxxx snapd[2601]: internal/poll.(*FD).Accept(0xc42009a500, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/internal/poll/fd_unix.go:372 +0x1aa
+Mar 18 22:53:41 xxxxxxx snapd[2601]: net.(*netFD).accept(0xc42009a500, 0x30, 0x55f2663ff7a0, 0xc4200ad520)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/net/fd_unix.go:238 +0x44
+Mar 18 22:53:41 xxxxxxx snapd[2601]: net.(*UnixListener).accept(0xc42030dd40, 0x0, 0xc420053400, 0xc420051e30)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/net/unixsock_posix.go:162 +0x34
+Mar 18 22:53:41 xxxxxxx snapd[2601]: net.(*UnixListener).Accept(0xc42030dd40, 0xc420051e30, 0xc420051e50, 0x55f265762c7a, 0x30)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/net/unixsock.go:253 +0x4b
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/daemon.(*ucrednetListener).Accept(0xc42030ddd0, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/ucrednet.go:108 +0x4f
+Mar 18 22:53:41 xxxxxxx snapd[2601]: net/http.(*Server).Serve(0xc420442270, 0x55f26647d060, 0xc42030ddd0, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/net/http/server.go:2773 +0x1a7
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/daemon.(*Daemon).Start.func1.1(0x55f265882ccb, 0xc4203b6ba0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/daemon.go:462 +0x4b
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc4202777e0, 0xc4203080e0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:53:41 xxxxxxx snapd[2601]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 15 [select, 1 minutes]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord.(*Overlord).Loop.func1(0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/overlord.go:399 +0x154
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc42029e5f0, 0xc420030160)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:53:41 xxxxxxx snapd[2601]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 16 [IO wait, 1 minutes]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: internal/poll.runtime_pollWait(0x7fb4229a9e30, 0x72, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/netpoll.go:173 +0x59
+Mar 18 22:53:41 xxxxxxx snapd[2601]: internal/poll.(*pollDesc).wait(0xc42009a418, 0x72, 0xc4200adb00, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:85 +0x9d
+Mar 18 22:53:41 xxxxxxx snapd[2601]: internal/poll.(*pollDesc).waitRead(0xc42009a418, 0xffffffffffffff00, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/internal/poll/fd_poll_runtime.go:90 +0x3f
+Mar 18 22:53:41 xxxxxxx snapd[2601]: internal/poll.(*FD).Accept(0xc42009a400, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/internal/poll/fd_unix.go:372 +0x1aa
+Mar 18 22:53:41 xxxxxxx snapd[2601]: net.(*netFD).accept(0xc42009a400, 0x30, 0x55f2663ff7a0, 0xc4200adba0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/net/fd_unix.go:238 +0x44
+Mar 18 22:53:41 xxxxxxx snapd[2601]: net.(*UnixListener).accept(0xc42030dd10, 0x0, 0xc420053400, 0xc42007be30)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/net/unixsock_posix.go:162 +0x34
+Mar 18 22:53:41 xxxxxxx snapd[2601]: net.(*UnixListener).Accept(0xc42030dd10, 0xc42007be30, 0xc42007be50, 0x55f265762c7a, 0x30)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/net/unixsock.go:253 +0x4b
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/daemon.(*ucrednetListener).Accept(0xc42030dd70, 0x0, 0x0, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/ucrednet.go:108 +0x4f
+Mar 18 22:53:41 xxxxxxx snapd[2601]: net/http.(*Server).Serve(0xc420442270, 0x55f26647d060, 0xc42030dd70, 0x0, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/net/http/server.go:2773 +0x1a7
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/daemon.(*Daemon).Start.func1(0xc42018cc20, 0xc42018cc40)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/daemon/daemon.go:470 +0x58
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc4202777e0, 0xc4200301e0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:53:41 xxxxxxx snapd[2601]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 34 [select, 1 minutes]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: main.runWatchdog.func1(0xc4200aab40, 0xc420277790)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:93 +0xff
+Mar 18 22:53:41 xxxxxxx snapd[2601]: created by main.runWatchdog
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/cmd/snapd/main.go:91 +0x22d
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 52 [semacquire, 1 minutes]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: sync.runtime_SemacquireMutex(0xc42014eab4, 0x55f26577c400)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/runtime/sema.go:71 +0x3f
+Mar 18 22:53:41 xxxxxxx snapd[2601]: sync.(*Mutex).Lock(0xc42014eab0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/sync/mutex.go:134 +0x10a
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/state.(*State).Lock(0xc42014eab0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/state/state.go:139 +0x2f
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/ifacestate.(*InterfaceManager).hotplugDeviceAdded(0xc42014e2d0, 0xc4200a8140)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/ifacestate/hotplug.go:110 +0x50
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/ifacestate.(*InterfaceManager).(github.com/snapcore/snapd/overlord/ifacestate.hotplugDeviceAdded)-fm(0xc4200a8140)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/ifacestate/ifacemgr.go:307 +0x36
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/overlord/ifacestate/udevmonitor.(*Monitor).Run.func1(0xc420196ac0, 0xc420196ae0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/overlord/ifacestate/udevmonitor/udevmon.go:136 +0x20a
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).run(0xc4203c2240, 0xc42007c380)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:163 +0x2d
+Mar 18 22:53:41 xxxxxxx snapd[2601]: created by github.com/snapcore/snapd/vendor/gopkg.in/tomb%2ev2.(*Tomb).Go
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/vendor/gopkg.in/tomb.v2/tomb.go:159 +0xbb
+Mar 18 22:53:41 xxxxxxx snapd[2601]: goroutine 51 [syscall, 1 minutes]:
+Mar 18 22:53:41 xxxxxxx snapd[2601]: syscall.Syscall6(0x2d, 0x4, 0xc4204f0000, 0x1000, 0x2, 0xc420576e08, 0xc420576dfc, 0x55f265761f88, 0x7fb4229b5c48, 0x0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/syscall/asm_linux_amd64.s:44 +0x5
+Mar 18 22:53:41 xxxxxxx snapd[2601]: syscall.recvfrom(0x4, 0xc4204f0000, 0x1000, 0x1000, 0x2, 0xc420576e08, 0xc420576dfc, 0x101000000000002, 0x0, 0x1000)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/syscall/zsyscall_linux_amd64.go:1665 +0xa8
+Mar 18 22:53:41 xxxxxxx snapd[2601]: syscall.Recvfrom(0x4, 0xc4204f0000, 0x1000, 0x1000, 0x2, 0x1000, 0xc42019cf40, 0xc42019cf60, 0xc42019cf80, 0xc42019cfa0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /usr/lib/go-1.10/src/syscall/syscall_unix.go:252 +0xb1
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).ReadMsg(0xc420251200, 0x55f26575695c, 0xc4200886c0, 0x0, 0xc42019b800, 0xc4201a0000)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:65 +0xc9
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).ReadUEvent(0xc420251200, 0xc4200886c0, 0xc420576f00, 0xc420576fc0)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:92 +0x31
+Mar 18 22:53:41 xxxxxxx snapd[2601]: github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).Monitor.func1(0xc4200886c0, 0xc420251200, 0xc420088660, 0x55f26647f4a0, 0xc4205585e0, 0xc420088600)
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:120 +0x55
+Mar 18 22:53:41 xxxxxxx snapd[2601]: created by github.com/snapcore/snapd/osutil/udev/netlink.(*UEventConn).Monitor
+Mar 18 22:53:41 xxxxxxx snapd[2601]:         /build/snapd-LMdP7f/snapd-2.43.3/_build/src/github.com/snapcore/snapd/osutil/udev/netlink/conn.go:114 +0xa6
+Mar 18 22:53:42 xxxxxxx systemd[1]: snapd.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+Mar 18 22:53:42 xxxxxxx systemd[1]: snapd.service: Unit entered failed state.
+Mar 18 22:53:42 xxxxxxx systemd[1]: snapd.service: Triggering OnFailure= dependencies.
+Mar 18 22:53:42 xxxxxxx systemd[1]: snapd.service: Failed with result 'exit-code'.
+Mar 18 22:53:42 xxxxxxx systemd[1]: snapd.service: Service hold-off time over, scheduling restart.
+Mar 18 22:53:42 xxxxxxx systemd[1]: Stopped Snappy daemon.
+Mar 18 22:53:42 xxxxxxx systemd[1]: Starting Snappy daemon...
+Mar 18 22:53:44 xxxxxxx snapd[2640]: AppArmor status: apparmor is enabled and all features are available
+Mar 18 22:53:44 xxxxxxx snapd[2640]: daemon.go:346: started snapd/2.43.3 (series 16) ubuntu-core/16 (amd64) linux/4.4.0-176-generic.
+Mar 18 22:53:44 xxxxxxx snapd[2640]: daemon.go:439: adjusting startup timeout by 1m40s (pessimistic estimate of 30s plus 5s per snap)
+Mar 18 22:53:45 xxxxxxx systemd[1]: Started Snappy daemon.
